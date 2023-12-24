@@ -1,0 +1,101 @@
+@use '../../../utils/variables';
+
+.wrapper {
+  margin: 0 24px;
+
+  color: #282828;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 44px;
+
+  section {
+    flex: 1;
+    height: 568px;
+    max-width: 568px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-width: 360px;
+
+    .dish-list {
+      display: flex;
+      flex-direction: column;
+      padding: 4px;
+      gap: 12px;
+      align-items: center;
+
+      div {
+        box-shadow: 0 0 4px rgba(40, 40, 40, 0.40);
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .class {
+      display: flex;
+      min-width: 204px;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 8px;
+      padding: 4px 28px;
+      background-color: white;
+      box-shadow: 0 0 4px rgba(40, 40, 40, 0.4);
+
+      .classdivider {
+        width: 2px;
+        height: 40px;
+        margin: 0 12px;
+        background-color: #282828;
+      }
+    }
+
+    .filters {
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0 0 4px rgba(40, 40, 40, 0.4);
+      margin-bottom: 24px;
+
+      border-radius: 12px;
+      overflow: clip;
+
+      .filter-divider {
+        width: 2px;
+        background-color: variables.$dark;
+        cursor: pointer;
+      }
+
+      .filter {
+        padding: 12px 24px;
+        background-color: white;
+        cursor: pointer;
+
+        transition: all 150ms ease;
+
+        &.active {
+          background-color: variables.$dark;
+          font-weight: bold;
+          color: white;
+        }
+      }
+    }
+
+  }
+
+  .divider {
+    background-color: rgba(40, 40, 40, 0.5);
+    height: 60vh;
+    width: 2px;
+    border-radius: 50px;
+    padding: 0;
+  }
+
+  h3 {
+    margin-bottom: 16px;
+  }
+}

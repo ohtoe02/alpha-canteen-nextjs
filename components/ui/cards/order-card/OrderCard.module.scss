@@ -1,0 +1,143 @@
+@use 'utils/variables';
+
+.order {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  p {
+    font-size: variables.$text-small;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: variables.$text_default;
+    font-weight: normal;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: variables.$text_xlarge;
+    font-weight: bold;
+    text-align: right;
+    margin: 0;
+  }
+
+  .order-card {
+    background-color: white;
+    border-radius: 12px;
+    max-width: 488px;
+    height: 64px;
+
+    padding: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.15));
+
+    .bottom-info {
+      display: flex;
+      justify-content: space-between;
+
+      align-items: baseline;
+    }
+  }
+
+  .dishes {
+    background-color: #FCFCFC;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 8px 16px 16px 16px;
+    border-radius: 12px;
+
+    width: 464px;
+
+    .order-dish {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+
+      height: 64px;
+      width: calc(100% - 40px);
+
+      img {
+        height: 100%;
+        width: 64px;
+
+        background-position: center;
+        object-fit: cover;
+
+        border-radius: 8px;
+      }
+
+      .dish-info {
+        flex: 1;
+        height: 100%;
+        margin: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+      }
+
+
+    }
+
+    .button-container {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      .button {
+        font-size: variables.$text_default;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 8px 36px;
+        outline: none;
+        border: none;
+
+        &:hover {
+          transform: translateY(-4px);
+          filter: drop-shadow(0 4px 4px rgba(49, 123, 54, 0.4));
+        }
+
+        &:active {
+          transform: translateY(0);
+          filter: drop-shadow(0 4px 1px rgba(49, 123, 54, 0.4))
+        }
+
+        transition: 150ms all ease-out;
+      }
+
+      .cancel-button {
+        background-color: #FFBEBE;
+        color: #FF4F4F;
+
+        &:hover {
+          filter: drop-shadow(0 4px 4px rgba(139, 42, 42, 0.4));
+        }
+
+        &:active {
+          filter: drop-shadow(0 4px 1px rgba(139, 42, 42, 0.4));
+        }
+      }
+
+      .edit-button {
+        background-color: #83FF8F;
+      }
+
+    }
+  }
+
+
+}

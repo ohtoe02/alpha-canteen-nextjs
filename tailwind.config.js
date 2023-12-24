@@ -12,5 +12,23 @@ module.exports = {
     extend: {},
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [nextui({
+    themes: {
+      light: {
+        colors: {
+          primary: {
+            DEFAULT: "#FFE3B8",
+            foreground: "#282828"
+          },
+          secondary: {
+            DEFAULT: "#282828",
+            foreground: 'white'
+          }
+        }
+
+      }
+    }
+  }),
+  require('@tailwindcss/typography')
+  ],
 }

@@ -1,0 +1,46 @@
+.canteen-card {
+  display: flex;
+  min-height: 48px;
+  width: clamp(360px, 100%, 480px);
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+
+  &.active {
+    &:after {
+      content: '';
+      left: -8px;
+      width: 2px;
+      height: 32px;
+      background-color: #282828;
+      position: absolute;
+      border-radius: 50px;
+
+      transition: all 350ms cubic-bezier(.71,0,.33,1.56);
+    }
+  }
+
+  .divider {
+    width: 2px;
+    height: 80%;
+    background-color: #282828;
+    border-radius: 50px;
+    box-shadow: none !important;
+  }
+
+  .preview {
+    width: 80px;
+    height: 48px;
+    object-fit: cover;
+    background-position: center;
+    border-radius: 12px;
+  }
+
+  p {
+    margin: 0 12px;
+  }
+}
+

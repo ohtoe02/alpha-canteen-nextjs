@@ -1,0 +1,16 @@
+@use '../../../utils/variables';
+
+.container {
+  width: 520px;
+  max-height: 80dvh;
+
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  color: variables.$dark;
+  font-size: variables.$text_header;
+}

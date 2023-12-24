@@ -1,0 +1,20 @@
+@use '../../../utils/variables';
+
+@keyframes grow {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.cart-button {
+  transition: all 350ms cubic-bezier(.71, 0, .33, 1.56);
+  animation: grow 350ms cubic-bezier(.71, 0, .33, 1.56);
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.1;
+  }
+}

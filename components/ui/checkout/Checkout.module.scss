@@ -1,0 +1,155 @@
+@use 'utils/variables';
+
+.cart-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  overflow: clip;
+
+  .no-dish-message {
+    font-weight: 300;
+  }
+
+  .dish-info {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 16px;
+
+    .dish-weight {
+      color: #808080;
+    }
+  }
+
+  .dish-price {
+    margin-right: 108px;
+  }
+
+  .remove {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 12px;
+    background-color: #FF5D5D;
+    cursor: pointer;
+
+    transition: all 150ms ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      object-fit: cover;
+      height: 64px;
+      width: 64px;
+      transform: translateX(50%);
+      transition: all 150ms ease-out;
+    }
+  }
+
+  &:hover {
+    .remove {
+      width: 92px;
+
+      img {
+        transform: translateX(0);
+      }
+    }
+  }
+
+}
+
+.checkout {
+  padding: 24px 56px;
+  //width: 960px;
+  border-radius: 12px;
+
+  color: variables.$dark;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 150ms ease;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1 {
+    font-weight: 500;
+  }
+
+  h3 {
+    font-weight: 400;
+  }
+
+  .inputs {
+    display: flex;
+    gap: 32px;
+    margin: 32px 0;
+
+    label {
+      width: 50%;
+
+      input {
+        border: #282828 solid 2px;
+        transition: all 150ms ease;
+      }
+
+      input[role='combobox']:active, input[role='combobox']:focus {
+        border-radius: 8px 8px 0 0;
+      }
+    }
+
+  }
+
+  .close {
+    position: absolute;
+    border: #282828 solid 1px;
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: center;
+    right: 16px;
+    top: 16px;
+    cursor: pointer;
+    font-weight: 400;
+    color: #282828;
+
+    transition: all 100ms ease;
+
+    &:hover {
+      box-shadow: 0 4px 4px rgba(40, 40, 40, 0.4);
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 2px;
+    margin-bottom: 24px;
+    background-color: #282828;
+    border-radius: 100px;
+  }
+
+  .bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+}

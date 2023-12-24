@@ -1,0 +1,57 @@
+@use 'utils/variables';
+
+.button-alpha {
+  &.submit {
+    color: white;
+    background-color: #83FF8F;
+
+    &:hover, &:active {
+      filter: drop-shadow(0 4px 4px rgba(49, 123, 54, 0.4));
+    }
+  }
+
+  &.dark-submit {
+    color: white;
+    background-color: #282828;
+
+    &:hover, &:active {
+      filter: drop-shadow(0 4px 4px rgba(40, 40, 40, 0.4));
+    }
+  }
+
+  &.login {
+    background-color: #FFE3B8;
+
+    &:hover, &:active {
+      filter: drop-shadow(0 4px 4px rgba(255, 227, 184, 0.4));
+    }
+  }
+
+  &.cancel {
+    background-color: #FFBEBE;
+    color: #FF4F4F;
+
+    &:hover, &:active {
+      filter: drop-shadow(0 4px 4px rgba(139, 42, 42, 0.4));
+    }
+  }
+
+  &.navigate {
+    width: 100%;
+    background-color: #282828;
+    color: white;
+    border-radius: 12px;
+  }
+
+  @media screen and (max-width: 1440px){
+    & {
+      font-size: 20px !important;
+    }
+  }
+
+  @media screen and (max-width: 1060px){
+    & {
+      font-size: 16px !important;
+    }
+  }
+}

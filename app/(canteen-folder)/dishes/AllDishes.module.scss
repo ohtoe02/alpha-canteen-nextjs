@@ -1,0 +1,100 @@
+@use '../../../utils/variables';
+
+.wrapper {
+  color: #282828;
+  margin: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 44px;
+
+  section {
+    flex: 1;
+    max-width: 568px;
+    height: 568px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .dish-list {
+      flex: 1;
+      display: flex;
+      width: 480px;
+      flex-direction: column;
+      margin-top: 32px;
+      gap: 8px;
+      overflow: auto;
+
+      @media screen and (max-width: 1440px){
+        & {
+          width: 360px;
+        }
+      }
+
+      @media screen and (max-width: 1080px){
+        & {
+          width: 300px;
+        }
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0 0 4px rgba(40, 40, 40, 0.4);
+
+      border-radius: 12px;
+      overflow: clip;
+
+      .filter-divider {
+        width: 2px;
+        background-color: variables.$dark;
+        cursor: pointer;
+      }
+
+      .filter {
+        padding: 12px 24px;
+        background-color: white;
+        cursor: pointer;
+
+        transition: all 150ms ease;
+
+        @media screen and (max-width: 1440px){
+          & {
+            font-size: 20px;
+          }
+        }
+
+        @media screen and (max-width: 1060px){
+          & {
+            font-size: 16px;
+          }
+        }
+
+
+        &.active {
+          background-color: variables.$dark;
+          font-weight: bold;
+          color: white;
+        }
+      }
+    }
+
+  }
+
+  .divider {
+    background-color: rgba(40, 40, 40, 0.5);
+    height: 60vh;
+    width: 2px;
+    border-radius: 50px;
+    margin: 0;
+    padding: 0;
+  }
+}

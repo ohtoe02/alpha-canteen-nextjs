@@ -1,0 +1,25 @@
+@use '../../../utils/variables';
+
+.container {
+  width: 1200px;
+  height: 600px;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 32px;
+
+  background-color: white;
+  border-radius: 12px;
+
+  color: variables.$dark;
+  font-size: variables.$text_header;
+
+  .orders-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 16px
+
+  }
+}

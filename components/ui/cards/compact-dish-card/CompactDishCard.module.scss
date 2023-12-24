@@ -1,0 +1,65 @@
+.compact-card {
+  display: flex;
+  min-height: 80px;
+  max-height: 80px;
+  width: clamp(300px, 100%, 480px);
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  overflow: clip;
+  background-color: #FCFCFC;
+
+
+  &:hover {
+    .edit {
+      width: 80px;
+
+      img {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  .preview {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    background-position: center;
+    border-radius: 12px;
+  }
+
+  .info {
+    flex: 1;
+    text-overflow: ellipsis;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+  }
+
+  h3 {
+    margin: 0 16px 0 0;
+  }
+
+  .edit {
+    width: 12px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: clip;
+    background-color: #96FF94;
+    transition: all 350ms cubic-bezier(.71,0,.33,1.56);
+
+    cursor: pointer;
+
+    img {
+      width: 56px;
+      transform: translateX(-90%);
+      transition: all 150ms ease;
+    }
+  }
+
+}
+
