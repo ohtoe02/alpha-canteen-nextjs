@@ -6,7 +6,7 @@ import OrderCard from "@/components/ui/cards/order-card/OrderCard";
 import {useEffect} from "react";
 
 
-function Page(): JSX.Element {
+function Orders(): JSX.Element {
 	// const setPageTitle : any = usePageTitle()
 
 	useEffect(() => {
@@ -24,4 +24,4 @@ function Page(): JSX.Element {
 	)
 }
 
-export default Page
+export default Orders
