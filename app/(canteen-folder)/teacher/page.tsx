@@ -4,26 +4,16 @@ import styles from './Teacher.module.scss'
 import { useEffect, useState } from 'react'
 import { useCredentials } from '@/hooks/use-auth'
 import { child, get, getDatabase, ref, set, update } from 'firebase/database'
-// import { usePageTitle } from '../../layouts/main/MainLayout'
 import AlphaButton from '@/components/ui/buttons/AlphaButton'
-import { dishType } from '@/utils/types/dishes/dishType'
 import { toast } from 'react-toastify'
 import { useDispatch, useStore } from 'react-redux'
 import { setStudents } from '@/utils/store/slices/studentsSlice'
 import firebase_app from '@/utils/firabaseconfig'
 import { useRouter } from 'next/navigation'
 import { Checkbox, CheckboxGroup } from '@nextui-org/checkbox'
-import { Divider } from '@nextui-org/divider'
 import Loading from '@/app/loading'
 
-const categories = ['Основное', '1', 'Второе', '2', 'Напитки']
-const translateCategories: { [id: string]: string } = {
-	Основное: 'mainDishes',
-	Второе: 'secondaryDishes',
-	Напитки: 'drinks'
-}
-
-function Page({ dish }: { dish?: dishType }): JSX.Element {
+function Page(): JSX.Element {
 	const currentDate = new Date().toDateString()
 	const [teacherClasses, setTeacherClasses] = useState([])
 	const [currentClass, setCurrentClass] = useState(null)
@@ -130,12 +120,6 @@ function Page({ dish }: { dish?: dishType }): JSX.Element {
 		} finally {
 			toast(`Посещаемость класса ${currentClass!['title']} отмечена!`)
 		}
-	}
-
-	const updateChecked = (checkedId: string) => {
-		const newChecked = { ...absentList, [checkedId]: !absentList[checkedId] }
-		setAbsentList(newChecked)
-		dispatch(setStudents({ students: newChecked }))
 	}
 
 	return (
