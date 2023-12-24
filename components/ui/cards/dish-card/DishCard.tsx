@@ -29,7 +29,7 @@ function DishCard({
 		>
 			<div className={styles['image-wrapper']}>
 				<Image
-					className={`${styles.image} aspect-auto`}
+					className={`${styles.image} aspect-[4/3]`}
 					draggable={false}
 					width={256}
 					height={256}

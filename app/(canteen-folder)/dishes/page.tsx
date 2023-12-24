@@ -8,6 +8,7 @@ import CompactDishCard from '@/components/ui/cards/compact-dish-card/CompactDish
 import EditDish from '@/components/ui/edit-dish/EditDish'
 import AlphaButton from '@/components/ui/buttons/AlphaButton'
 import firebase_app from '@/utils/firabaseconfig'
+import { Skeleton } from '@nextui-org/skeleton'
 
 export const revalidate = 600
 
@@ -27,6 +28,7 @@ function Page(): JSX.Element {
 		drinks: []
 	})
 	const [selectOption, setSelectOption] = useState('select')
+	const [isLoaded, setIsLoaded] = useState(false)
 	// const setPageTitle: any = usePageTitle()
 	const { school } = useCredentials()
 	const database = getDatabase(firebase_app)
@@ -37,7 +39,7 @@ function Page(): JSX.Element {
 
 		// preload(school!)
 
-		getDishes()
+		getDishes().then(() => setIsLoaded(true))
 	}, [selectOption, chosenDish])
 
 	const getDishes = cache(async () => {
@@ -87,15 +89,17 @@ function Page(): JSX.Element {
 					))}
 				</div>
 
-				<div className={styles['dish-list']}>
-					{Object.values(allDishes[translateCategories[currentFilter]]).map(
-						item => (
-							<CompactDishCard key={item['id']} dish={item} onClick={() => {
-								chooseToEdit(item)
-							}} />
-						)
-					)}
-				</div>
+				<Skeleton isLoaded={isLoaded} className={'w-[480px] flex-1 mt-8'}>
+					<div className={styles['dish-list']}>
+						{Object.values(allDishes[translateCategories[currentFilter]]).map(
+							item => (
+								<CompactDishCard key={item['id']} dish={item} onClick={() => {
+									chooseToEdit(item)
+								}} />
+							)
+						)}
+					</div>
+				</Skeleton>
 			</section>
 			<div className={styles.divider}></div>
 			<section>

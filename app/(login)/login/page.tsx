@@ -12,7 +12,6 @@ import firebase_app from '@/utils/firabaseconfig'
 import { useRouter } from 'next/navigation'
 import { Input } from '@nextui-org/input'
 import { Select, SelectItem } from '@nextui-org/select'
-import { NavigateTo } from '@/utils/navigation/navigation'
 
 type Inputs = {
 	login: string
@@ -31,6 +30,11 @@ function Page(): JSX.Element {
 
 	useEffect(() => {
 		document.title = 'Вход в систему'
+
+		if (isAuth) {
+			router.replace('/menu')
+		}
+
 		getSchools()
 	}, [])
 	const {
@@ -87,7 +91,6 @@ function Page(): JSX.Element {
 
 	return (
 		<section className={`${styles['login-container']}`}>
-			{isAuth && <NavigateTo type={'replace'} path={'/menu'} />}
 			<h1 className={'font-bold mb-12 text-4xl text-white'}>Вход в систему</h1>
 			<form className={`${styles['login-form']}`} action={onSubmit}>
 				<Input

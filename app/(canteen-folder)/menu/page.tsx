@@ -10,7 +10,7 @@ import { useDispatch, useStore } from 'react-redux'
 import { setDish, clearCart } from '@/utils/store/slices/cartSlice'
 import { getDishes } from '@/utils/get-items/getItems'
 import { Tab, Tabs } from '@nextui-org/tabs'
-import { Card, CardBody } from '@nextui-org/card'
+import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import { Skeleton } from '@nextui-org/skeleton'
 import { CartIcon } from '@nextui-org/shared-icons'
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@nextui-org/modal'
@@ -110,7 +110,7 @@ function Page(): JSX.Element {
 
 	return (
 		<>
-			<div className={`align-center`}>
+			<div className={`flex justify-center gap-8`}>
 				<
 					// @ts-ignore
 					Modal
@@ -142,8 +142,8 @@ function Page(): JSX.Element {
 					</ModalContent>
 				</Modal>
 				{!isLoaded && <Loading />}
-				<Card className={`max-w-fit mx-auto lg:w-3/4 ${!isLoaded && 'invisible'}`}>
-					<CardBody className={'items-center  p-4  xl:min-w-[814px]'}>
+				<Card className={`max-w-fit lg:w-3/4 ${!isLoaded && 'invisible'}`}>
+					<CardBody className={'items-center p-4 overflow-x-hidden'}>
 						<Tabs radius={'md'} variant={'bordered'} className={'justify-center scale-75 sm:scale-100'} size={'lg'}
 									classNames={{ tabContent: 'text-black' }}
 									color={'secondary'}>
@@ -165,12 +165,28 @@ function Page(): JSX.Element {
 					</CardBody>
 				</Card>
 
+				<Card className={'h-full hidden lg:block ${!isLoaded && \'invisible\'}'}>
+					<CardHeader className={'pb-0'}>
+						<h1 className={'text-2xl text-center mx-auto m-0'}>Моя корзина</h1>
+					</CardHeader>
+					<CardBody >
+						<Checkout
+							cart={cart}
+							closeHandler={() => {
+							}}
+							removeDish={updateCart}
+							clearCart={clearCartHandler}
+						/>
+					</CardBody>
+				</Card>
+
 
 			</div>
 			{
 				Object.values(cart).filter(item => item).length ? (
-					<Button color={'secondary'} isIconOnly size={'lg'} className={`transition-all animate-appearance-in fixed bottom-8 right-8 flex gap-4 scale-[135%] items-center lg:hidden`}
-							 onClick={onOpen}>
+					<Button color={'secondary'} isIconOnly size={'lg'}
+									className={`transition-all fixed bottom-8 right-8 flex gap-4 scale-[135%] items-center lg:hidden`}
+									onClick={onOpen}>
 						{/*{Object.entries(cart)*/}
 						{/*	.filter(item => item[1])*/}
 						{/*	.map(item => categoriesLabels[item[0]])*/}

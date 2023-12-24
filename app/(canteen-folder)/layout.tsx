@@ -14,7 +14,7 @@ export default function CanteenLayout({
 			<UnauthCheck />
 			<div className='relative flex flex-col h-screen'>
 				<Navbar />
-				<main className='container mx-auto max-w-7xl px-6 flex-grow p-16'>
+				<main className='container mx-auto max-w-7xl flex-grow p-4 xl:py-16'>
 					{children}
 				</main>
 			</div>

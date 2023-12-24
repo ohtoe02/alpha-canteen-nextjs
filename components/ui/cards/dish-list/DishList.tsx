@@ -20,7 +20,8 @@ function DishList({
 	chooseHandler: (id: dishType | null) => void
 }): JSX.Element {
 	const [currentPage, setCurrentPage] = useState(1)
-	const maxPages = Math.ceil(dishes.length / 5)
+	const itemsOnPage = matchMedia('(max-width: 1024px)').matches ? 4 : 5
+	const maxPages = Math.ceil(dishes.length / itemsOnPage)
 
 	const selectHandler = (event: any, dish: dishType) => {
 		const newDish = cart[category]?.id === dish?.id ? null : dish
@@ -28,16 +29,31 @@ function DishList({
 	}
 
 	const currentDishes = dishes.slice(
-		5 * (currentPage - 1),
-		Math.min(5 * currentPage, dishes.length)
+		itemsOnPage * (currentPage - 1),
+		Math.min(itemsOnPage * currentPage, dishes.length)
 	)
 
 	return (
-		<div className={'flex flex-col items-center'}>
+		<div className={'flex flex-col items-center '}>
 			{/*<h3 className={"text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center "}>{title}</h3>*/}
 			<Card shadow={'none'} className={'mb-8'}>
-				<CardBody>
-					<section className={'grid grid-cols-2 xl:grid-cols-3 gap-4 grid-rows-2'}>
+				<CardBody >
+					{/*<section className={'grid grid-cols-2 xl:grid-cols-3 gap-4 grid-rows-2'}>*/}
+					{/*	{currentDishes.map(dish => {*/}
+					{/*		return (*/}
+					{/*			<DishCard*/}
+					{/*				key={dish!.id}*/}
+					{/*				id={dish!.id}*/}
+					{/*				isSelected={dish!.id === cart[category]?.id}*/}
+					{/*				selectHandler={(event: any) => {*/}
+					{/*					selectHandler(event, dish)*/}
+					{/*				}}*/}
+					{/*				dish={dish}*/}
+					{/*			/>*/}
+					{/*		)*/}
+					{/*	})}*/}
+					{/*</section>*/}
+					<section className={'grid grid-cols-2 gap-4 auto-rows-max'}>
 						{currentDishes.map(dish => {
 							return (
 								<DishCard

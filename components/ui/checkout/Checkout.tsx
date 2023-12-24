@@ -8,7 +8,6 @@ import { child, get, getDatabase, push, ref, set } from 'firebase/database'
 import { KidType } from '@/utils/types/kidType'
 import { useCredentials } from '@/hooks/use-auth'
 import ReactDatePicker, { registerLocale } from 'react-datepicker'
-// import ru from 'date-fns/locale/ru'
 import DatalistInput, { useComboboxControls } from 'react-datalist-input'
 import { toast } from 'react-toastify'
 import Image from 'next/image'
@@ -17,6 +16,8 @@ import { IoTrashBinOutline } from 'react-icons/io5'
 import { Chip } from '@nextui-org/chip'
 import { Card, CardBody } from '@nextui-org/card'
 import { Divider } from '@nextui-org/divider'
+import { Listbox } from '@nextui-org/listbox'
+import { Select, SelectItem } from '@nextui-org/select'
 
 function CartItem({
 										dish,
@@ -30,20 +31,28 @@ function CartItem({
 	'use client'
 
 	return (
-		<Card className={'h-full max-h-24'} classNames={{ body: 'p-0 flex-row' }} shadow={'sm'}>
+		<Card className={'h-full max-h-28 max-w-'} classNames={{ body: 'p-0 flex-row' }} shadow={'sm'}>
 			{dish ? (
 				<CardBody className={'gap-4'}>
 					<Image className={'aspect-square object-cover'} quality={70} width={100} height={100} src={dish.picture}
 								 alt={dish.title} />
-					<div className={'flex flex-1 py-2 lg:py-4 justify-between flex-col self-stretch'}>
-						<p className={'text-large lg:text-xl leading-tight lg:leading-normal mt-1 lg:mt-0'}>{dish.title}</p>
-						<p className={'text-medium lg;text-large text-gray-500'}>{dish.weight} г.</p>
+					<div className={'flex flex-auto py-2 xl:py-4 justify-between flex-col'}>
+						<p className={'text-large xl:text-xl leading-tight xl:leading-normal mt-1 xl:mt-0'}>{dish.title}</p>
+						<p className={'text-medium xl:text-large text-gray-500'}>{dish.weight} г.</p>
 					</div>
-					<div className={'flex flex-col lg:flex-row justify-center mr-2 lg:mr-0'}>
+					{/*<div className={'flex flex-shrink-0 flex-col xl:flex-row justify-center mr-2 xl:mr-0'}>*/}
+					{/*	<Chip size={'lg'} variant={'bordered'} radius={'md'}*/}
+					{/*				className={'p-2 xl:p-4 border-1 border-slate-900 self-center mr-0 xl:mr-4 text-large xl:text-xl scale-80 xl:scale-100'}>{dish.price}₽</Chip>*/}
+					{/*	<Button size={'lg'} isIconOnly color={'danger'} aria-label={'Удалить'} onClick={removeHandler}*/}
+					{/*					className={'self-center xl:mr-8 scale-75 xl:scale-100'}>*/}
+					{/*		<IoTrashBinOutline size={'32px'} />*/}
+					{/*	</Button>*/}
+					{/*</div>*/}
+					<div className={'flex flex-shrink-0 flex-col  justify-center mr-2 '}>
 						<Chip size={'lg'} variant={'bordered'} radius={'md'}
-									className={'p-2 lg:p-4 border-1 border-slate-900 self-center mr-0 lg:mr-4 text-large lg:text-2xl scale-80 lg:scale-100'}>{dish.price}₽</Chip>
+									className={'p-2  border-1 border-slate-900 self-center mr-0 text-large  scale-80'}>{dish.price}₽</Chip>
 						<Button size={'lg'} isIconOnly color={'danger'} aria-label={'Удалить'} onClick={removeHandler}
-										className={'self-center lg:mr-8 scale-75 lg:scale-100'}>
+										className={'self-center scale-75 '}>
 							<IoTrashBinOutline size={'32px'} />
 						</Button>
 					</div>
@@ -86,10 +95,12 @@ function SecondPage({
 											cart,
 											clearCart,
 											closeHandler,
+											removeDish,
 											goBack
 										}: {
 	cart: { [id: string]: dishType | null }
 	clearCart: () => void
+	removeDish: (category: string, dish: dishType | null) => void
 	closeHandler: () => void
 	goBack: () => void
 }) {
@@ -168,52 +179,37 @@ function SecondPage({
 
 	return (
 		<form>
-			<div className={''}>
-				<label>
-					Кто питается:
-					<DatalistInput
-						label={''}
-						placeholder={'Ребенок'}
-						value={value}
-						onSelect={item => {
-							setValue(item.value)
-						}}
-						items={kids.map(item => {
-							return {
-								id: item.id,
-								value: item.name
-							}
-						})}
-						{...register('kid', { required: false })}
-					/>
-				</label>
-				<label>
-					Когда питается:
-					<
-						// @ts-ignore
-						ReactDatePicker
-						portalId={'root-portal'}
-						popperClassName={'datepicker'}
-						selected={selectedDate}
-						autoComplete={'disable'}
-						className={''}
-						minDate={new Date()}
-						locale={'ru'}
-						onChange={date => {
-							setSelectedDate(date)
-						}}
-					/>
-				</label>
+			<CartList cart={cart} removeDish={removeDish} />
+			<Divider className={'my-4'} />
+			<div className={'flex flex-col gap-4'}>
+				<Select
+					name={'kid'}
+					label={'Кто питается'}
+					placeholder={'Ребенок'}
+					size={'md'}
+					radius={'md'}
+
+					isRequired
+					selectedKeys={[value]}
+					onChange={(e) => {
+						setValue(e.target.value)
+					}}
+				>
+					{kids.map(item => {
+						return <SelectItem key={item.id!}
+															 value={item.name}>{item.name.split(' ').slice(0, 2).join(' ')}</SelectItem>
+					})}
+				</Select>
 			</div>
-			<div className={''} />
-			<div className={''} style={{}}>
-				<AlphaButton color={'danger'} variant={'flat'} clickHandler={goBack}>
-					Назад
-				</AlphaButton>
-				<h3>Итого: {price}₽</h3>
-				<AlphaButton clickHandler={handleSubmit(onSubmit)}>
+			<Divider className={'my-4'} />
+			<div className={'flex justify-between items-center gap-4'} style={{}}>
+				<Button color={'danger'} variant={'flat'} className={'text-medium'} onClick={clearCart}>
+					Очистить
+				</Button>
+				<h3 className={'text-large lg:text-xl'}>Итого: {price}₽</h3>
+				<Button color={'primary'} className={'text-medium'} onClick={handleSubmit(onSubmit)}>
 					Готово
-				</AlphaButton>
+				</Button>
 			</div>
 		</form>
 	)
@@ -223,7 +219,6 @@ function FirstPage({
 										 cart,
 										 removeDish,
 										 clearCart,
-										 closeHandler,
 										 goNext
 									 }: {
 	cart: { [id: string]: dishType | null }
@@ -238,19 +233,16 @@ function FirstPage({
 
 	return (
 		<>
-			{/*<button className={styles.close} onClick={closeHandler}>*/}
-			{/*	X*/}
-			{/*</button>*/}
 			<CartList cart={cart} removeDish={removeDish} />
 			<Divider className={'my-4'} />
 			<div className={'flex justify-between items-center'}>
-				<AlphaButton color={'danger'} variant={'flat'} clickHandler={clearCart}>
+				<Button color={'danger'} variant={'flat'} className={'text-medium'} onClick={clearCart}>
 					Очистить
-				</AlphaButton>
-				<h3 className={'text-xl'}>Итого: {price}₽</h3>
-				<AlphaButton color={'primary'} clickHandler={goNext}>
-					Оформить
-				</AlphaButton>
+				</Button>
+				<h3 className={'text-large lg:text-xl'}>Итого: {price}₽</h3>
+				<Button color={'primary'} className={'text-medium'} onClick={goNext}>
+					К оформлению
+				</Button>
 			</div>
 		</>
 	)
@@ -260,33 +252,44 @@ function Checkout({
 										cart,
 										removeDish,
 										clearCart,
-										closeHandler
+										closeHandler,
+										className
 									}: {
 	cart: { [id: string]: dishType | null }
 	removeDish: (category: string, dish: dishType | null) => void
 	clearCart: () => void
 	closeHandler: () => void
+	className?: string
 }): JSX.Element {
 	const [isFirstPage, setIsFirstPage] = useState(true)
 
 	return (
-		<section className={'pb-4'}>
-			{isFirstPage ? (
-				<FirstPage
-					cart={cart}
-					removeDish={removeDish}
-					clearCart={clearCart}
-					closeHandler={closeHandler}
-					goNext={() => setIsFirstPage(false)}
-				/>
-			) : (
-				<SecondPage
-					cart={cart}
-					clearCart={clearCart}
-					closeHandler={closeHandler}
-					goBack={() => setIsFirstPage(true)}
-				/>
-			)}
+		<section className={`pb-4 ${className}`}>
+			{/*{isFirstPage ? (*/}
+			{/*	<FirstPage*/}
+			{/*		cart={cart}*/}
+			{/*		removeDish={removeDish}*/}
+			{/*		clearCart={clearCart}*/}
+			{/*		closeHandler={closeHandler}*/}
+			{/*		goNext={() => setIsFirstPage(false)}*/}
+			{/*	/>*/}
+			{/*) : (*/}
+			{/*	<SecondPage*/}
+			{/*		cart={cart}*/}
+			{/*		clearCart={clearCart}*/}
+			{/*		removeDish={removeDish}*/}
+			{/*		closeHandler={closeHandler}*/}
+			{/*		goBack={() => setIsFirstPage(true)}*/}
+			{/*	/>*/}
+			{/*)}*/}
+
+			<SecondPage
+				cart={cart}
+				clearCart={clearCart}
+				removeDish={removeDish}
+				closeHandler={closeHandler}
+				goBack={() => setIsFirstPage(true)}
+			/>
 		</section>
 	)
 }

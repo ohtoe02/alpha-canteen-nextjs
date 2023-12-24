@@ -8,7 +8,6 @@ export const siteConfig = {
 		{ label: 'Все блюда', href: '/dishes' },
 		{ label: 'Семья', href: '/family' },
 		{ label: 'История', href: '/history' },
-		{ label: 'Заказы', href: '/orders' },
 		{ label: 'Меню', href: '/menu' },
 		{ label: 'Учитель', href: '/teacher' }
 	],
@@ -17,8 +16,9 @@ export const siteConfig = {
 		{ label: 'Все блюда', href: '/dishes' },
 		{ label: 'Семья', href: '/family' },
 		{ label: 'История', href: '/history' },
-		{ label: 'Заказы', href: '/orders' },
 		{ label: 'Меню', href: '/menu' },
 		{ label: 'Учитель', href: '/teacher' }
 	]
 }
+
+//Заказы -

@@ -1,3 +1,5 @@
+'use client'
+
 import {
 	Navbar as NextUINavbar,
 	NavbarContent,
@@ -15,13 +17,17 @@ import { ThemeSwitch } from '@/components/theme-switch'
 import { useDispatch } from 'react-redux'
 import { removeUser } from '@/utils/store/slices/userSlice'
 import LeaveButton from '@/components/ui/LeaveButton'
+import { usePathname } from 'next/navigation'
 
 
 export const Navbar = () => {
+	const pageName = usePathname()
+
+
 	return (
 		<NextUINavbar maxWidth='xl' position='sticky' isBordered>
-			<NavbarContent className='hidden lg:flex basis-1/5 sm:basis-full' justify='center'>
-				<ul className='flex gap-4 ml-2'>
+			<NavbarContent className='basis-full' justify='center' >
+				<ul className='hidden lg:flex gap-4 ml-2'>
 					{siteConfig.navItems.map((item) => (
 						<NavbarItem key={item.href}>
 							<NextLink
@@ -36,8 +42,9 @@ export const Navbar = () => {
 							</NextLink>
 						</NavbarItem>
 					))}
+					<LeaveButton />
 				</ul>
-				<LeaveButton />
+				<h1 className={'block lg:hidden text-2xl font-bold'}>{siteConfig.navItems.filter(item => item.href === pageName)[0].label}</h1>
 			</NavbarContent>
 		</NextUINavbar>
 	)

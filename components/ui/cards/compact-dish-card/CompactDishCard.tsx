@@ -12,7 +12,7 @@ function CompactDishCard({dish, onClick}: {dish: any, onClick: () => void}): JSX
 			</div>
 			<h3>{dish['price']}₽</h3>
 			<div className={styles.edit}>
-				<Image src={editIcon} alt='' />
+				<Image src={editIcon} width={100} height={100} alt='' />
 			</div>
 		</div>
 	)
